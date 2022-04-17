@@ -10,14 +10,6 @@ parameters:
     description: Is a remote docker setup required.
     type: boolean
     default: true
-  username:
-    description: Username of the user when pushing to the registry.
-    type: string
-    default: ""
-  password:
-    description: Password used when pushing to the registry.
-    type: string
-    default: "${DOCKER_TOKEN}"
 steps:
   - when:
       condition: <<parameters.remote_docker>>
