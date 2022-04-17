@@ -35,7 +35,6 @@ steps:
       name: Build & push docker native image
       working_directory: << parameters.dir >>
       environment:
-        MVN_SETTINGS_FILE: <<parameters.maven-settings>>
         DOCKER_FILE: <<parameters.docker-file>>
         IMAGE_TAG: <<parameters.tag>>
         IMAGE_GROUP: <<parameters.image-group>>

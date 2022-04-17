@@ -7,7 +7,7 @@ parameters:
   executor:
     description: Executor to run on.
     type: string
-    default: java11-build-amd64
+    default: "java11-build-amd64"
 executor: <<parameters.executor>>
 steps:
   - checkout
