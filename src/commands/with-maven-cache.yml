@@ -1,0 +1,24 @@
+description: >
+  Run steps with a cache taylored for maven builds
+parameters:
+  steps:
+    description: |
+      The steps to execute after the cache has been restored.
+    type: steps
+  dir:
+    description: |
+      The directory the command is executed in.
+    type: string
+    default: ""
+steps:
+  - run:
+      command: <<include(scripts/generate-maven-cache-seed.sh>>
+      name: Generate Cache Checksum
+      working_directory: $CIRCLE_WORKING_DIRECTORY/<< parameters.dir >>
+  - restore_cache:
+      key: maven-{{ checksum "/tmp/maven_cache_seed" }}
+  - steps: << parameters.steps >>
+  - save_cache:
+      key: maven-{{ checksum "/tmp/maven_cache_seed" }}
+      paths:
+        - ~/.m2/repository

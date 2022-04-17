@@ -1,0 +1,8 @@
+description: >
+ Executor with GraalVM and native image on ARM64.
+machine: true
+resource_class: rafaelostertag/runners-arm64
+environment:
+  GRAALVM_HOME: /opt/graalvm
+  JAVA_HOME: /opt/graalvm
+  PATH: /opt/graalvm/bin:/usr/bin:/bin:/usr/local/bin

@@ -1,0 +1,42 @@
+description: Build docker multi-arch manifest
+parameters:
+  tag:
+    description: Tag of the image.
+    type: string
+  image:
+    description: The image name without the tag.
+    type: string
+  remote_docker:
+    description: Is a remote docker setup required.
+    type: boolean
+    default: true
+  username:
+    description: Username of the user when pushing to the registry.
+    type: string
+    default: ""
+  password:
+    description: Password used when pushing to the registry.
+    type: string
+    default: "${DOCKER_TOKEN}"
+steps:
+  - when:
+      condition: <<parameters.remote_docker>>
+      steps:
+        - setup_remote_docker:
+            version: 20.10.11
+            docker_layer_caching: true
+  - run:
+      name: Docker login
+      command: <<include(scripts/docker-login.sh)>>
+  - run:
+      name: Create multi-arch manifest
+      environment:
+        IMAGE_NAME: <<parameters.image>>
+        IMAGE_TAG: <<parameters.tag>>
+      command: <<include(scripts/docker-multi-arch-manifest.sh)>>
+  - run:
+      name: Push multi-arch manifest
+      environment:
+        IMAGE_NAME: <<parameters.image>>
+        IMAGE_TAG: <<parameters.tag>>
+      command: <<include(scripts/docker-push-multi-arch-manifest.sh)>>

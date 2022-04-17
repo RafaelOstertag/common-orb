@@ -1,0 +1,6 @@
+description: >
+  Executor with GraalVM and native image on AMD64
+docker-amd64:
+docker:
+  - image: rafaelostertag/graalvm:java11-22-0
+resource_class: large
