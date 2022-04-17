@@ -1,0 +1,47 @@
+description: >
+  Build native docker image using quarkus.
+parameters:
+  dir:
+    description: Directory in which `mvn` is called.
+    type: string
+  tag:
+    description: The tag of the image.
+    type: string
+  remote_docker:
+    description: Is a remote docker setup required.
+    type: boolean
+    default: true
+  push:
+    description: Whether to push the image to the registry.
+    type: boolean
+    default: true
+  image-group:
+    description: The image group
+    type: string
+    default: rafaelostertag
+  docker-file:
+    description: Dockerfile used for native Docker image
+    type: string
+    default: src/main/docker/Dockerfile.native-ubi
+  maven-settings:
+    description: Path to maven settings file.
+    type: string
+    default: $HOME/project/.circleci/settings.xml
+steps:
+  - when:
+      condition: <<parameters.remote_docker>>
+      steps:
+        - setup_remote_docker:
+            version: 20.10.11
+            docker_layer_caching: true
+  - checkout
+  - run:
+      name: Build & push docker native image
+      working_directory: << parameters.dir >>
+      environment:
+        MVN_SETTINGS_FILE: <<parameters.maven-settings>>
+        DOCKER_FILE: <<parameters.docker-file>>
+        IMAGE_TAG: <<parameters.tag>>
+        IMAGE_GROUP: <<parameters.image-group>>
+        PUSH_IMAGE: <<parameters.push>>
+      command: <<include(scripts/quarkus-native-docker-image.sh)>>
