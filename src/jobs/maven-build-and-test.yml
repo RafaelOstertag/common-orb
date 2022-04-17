@@ -1,0 +1,20 @@
+description: >
+  Build and test maven project. Also runs dependency-check and sonar.
+parameters:
+  sonar-project-key:
+    description: Sonar project key.
+    type: string
+  executor:
+    description: Executor to run on.
+    type: executor
+    default: java11-build-amd64
+executor: <<parameters.executor>>
+steps:
+  - checkout
+  - with-maven-cache:
+      steps:
+        - run:
+            environment:
+              SONAR_PROJECT_KEY: <<parameters.sonar-project-key>>
+            name: Build and test
+            command: <<include(scripts/maven-build-and-test.sh)>>
