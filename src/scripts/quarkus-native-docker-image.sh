@@ -1,5 +1,5 @@
 mvn -B \
-  -s "${MVN_SETTINGS_FILE}" \
+  -s "$(eval echo ${MVN_SETTINGS_FILE})" \
   clean \
   package \
   -DskipTests \
