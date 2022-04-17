@@ -23,10 +23,6 @@ parameters:
     description: Dockerfile used for native Docker image
     type: string
     default: src/main/docker/Dockerfile.native-ubi
-  maven-settings:
-    description: Path to maven settings file.
-    type: string
-    default: $HOME/project/.circleci/settings.xml
 steps:
   - when:
       condition: <<parameters.remote_docker>>

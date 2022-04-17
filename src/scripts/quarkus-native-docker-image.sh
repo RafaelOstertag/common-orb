@@ -1,5 +1,5 @@
 mvn -B \
-  -s "$(eval echo ${MVN_SETTINGS_FILE})" \
+  -s "$HOME/project/.circleci/settings.xml" \
   clean \
   package \
   -DskipTests \
