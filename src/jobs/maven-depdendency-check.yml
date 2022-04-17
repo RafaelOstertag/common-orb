@@ -1,0 +1,15 @@
+description: >
+  Execute maven dependency check plugin.
+parameters:
+  executor:
+    description: Executor to run on.
+    type: string
+    default: java11-build-amd64
+executor: <<parameters.executor>>
+steps:
+  - checkout
+  - with-maven-cache:
+      steps:
+        - run:
+            name: Execute depdendency-check plugin
+            command: <<include(scripts/maven-dependency-check.sh)>>

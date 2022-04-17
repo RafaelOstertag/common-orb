@@ -1,0 +1,15 @@
+description: >
+  Deploy maven artifacts.
+parameters:
+  executor:
+    description: Executor to run on.
+    type: string
+    default: java11-build-amd64
+executor: <<parameters.executor>>
+steps:
+  - checkout
+  - with-maven-cache:
+      steps:
+        - run:
+            name: Build and deploy
+            command: <<include(scripts/maven-deploy.sh)>>
