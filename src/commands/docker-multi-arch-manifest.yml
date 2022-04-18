@@ -1,4 +1,6 @@
-description: Build docker multi-arch manifest
+description: >
+  Build docker multi-arch manifest. If no tag is provided, it is read from the POM file. If it's a snapshot version, 
+  the tag  will be `latest`, else it's equal to the version of the POM.
 parameters:
   tag:
     description: Tag of the image.
