@@ -1,0 +1,27 @@
+description: >
+  Deploy service to kubernetes with Helm. If the release does not yet exist,
+  it will be created.
+parameters:
+  namespace:
+    description: Namespace to deploy into.
+    type: string
+  release:
+    description: Name of the release.
+    type: string
+  version:
+    description: Docker image version.
+    type: string
+  chart:
+    description: Chart directory.
+    type: string
+executor: helm-executor
+steps:
+  - checkout
+  - run:
+      name: Upgrade helm chart
+      environment:
+        K8S_NAMESPACE: <<parameters.namespace>>
+        HELM_RELEASE: <<parameters.release>>
+        HELM_CHART: <<parameters.chart>>
+        IMAGE_VERSION: <<parameters.version>>
+      command: <<include(scripts/helm-upgrade.sh)>>
