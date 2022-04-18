@@ -3,10 +3,10 @@ if [ -z "$IMAGE_TAG" ]; then
   POM_VERSION=$(mvn -q help:evaluate -DforceStdout -Dexpression='project.version')
 
   IMAGE_TAG=""
-  if echo "$POM_VERSION" | grep -E '-SNAPSHOT$' >/dev/null; then
+  if echo "$POM_VERSION" | grep -E -- '-SNAPSHOT$' >/dev/null; then
     IMAGE_TAG="latest"
   else
-    IMAGE_TAG="POM_VERSION"
+    IMAGE_TAG="${POM_VERSION}"
   fi
 
   echo "****"
