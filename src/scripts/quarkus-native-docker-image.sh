@@ -9,7 +9,23 @@ if [ -z "$IMAGE_TAG" ]; then
     IMAGE_TAG="${POM_VERSION}"
   fi
 
+  MACHINE=$(uname -m)
+  case "${MACHINE}" in
+  x86_64)
+    VERSION_SUFFIX="amd64"
+    ;;
+  aarch64)
+    VERSION_SUFFIX="arm64"
+    ;;
+  *)
+    echo "${MACHINE} is not supported" >&2
+    exit 2
+  esac
+
+  IMAGE_TAG="${IMAGE_TAG}-${VERSION_SUFFIX}"
+
   echo "****"
+  echo "Machine: ${MACHINE} -> ${VERSION_SUFFIX}"
   echo "POM_VERSION: ${POM_VERSION}"
   echo "****"
 fi
