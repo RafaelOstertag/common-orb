@@ -3,8 +3,9 @@ description: >
   the tag  will be `latest`, else it's equal to the version of the POM.
 parameters:
   tag:
-    description: Tag of the image.
+    description: Tag of the image. When not set, the tag is the version of the POM.
     type: string
+    default:
   image:
     description: The image name without the tag.
     type: string
