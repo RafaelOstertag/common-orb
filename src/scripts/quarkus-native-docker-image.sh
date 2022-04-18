@@ -18,8 +18,7 @@ echo "****"
 echo "IMAGE_TAG: ${IMAGE_TAG}"
 echo "****"
 
-mvn -B \
-  -s "$HOME/project/.circleci/settings.xml" \
+mvn -s "$HOME/project/.circleci/settings.xml" \
   clean \
   package \
   -DskipTests \
