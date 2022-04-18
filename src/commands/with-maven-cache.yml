@@ -1,5 +1,5 @@
 description: >
-  Run steps with a cache taylored for maven builds
+  Run steps with a cache tailored for maven builds.
 parameters:
   steps:
     description: |
