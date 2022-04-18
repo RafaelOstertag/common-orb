@@ -6,8 +6,9 @@ parameters:
     description: Directory in which `mvn` is called.
     type: string
   tag:
-    description: The tag of the image.
+    description: Tag of the image. When not set, the tag is the version of the POM.
     type: string
+    default:
   remote_docker:
     description: Is a remote docker setup required.
     type: boolean
