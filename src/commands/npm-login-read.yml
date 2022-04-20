@@ -1,0 +1,7 @@
+description: >
+  Login to the npm repository for downloading packages
+steps:
+  - run:
+      name: Login to scoped registry
+      command: <<include(scripts/npm-login.sh)>>
+

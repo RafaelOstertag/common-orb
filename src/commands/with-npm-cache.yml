@@ -1,0 +1,15 @@
+description: >
+  Run steps with a cache tailored for npm builds.
+parameters:
+  steps:
+    description: |
+      The steps to execute after the cache has been restored.
+    type: steps
+steps:
+  - restore_cache:
+      key: npm-{{ checksum "package.json" }}
+  - steps: << parameters.steps >>
+  - save_cache:
+      key: npm-{{ checksum "package.json" }}
+      paths:
+        - ./node_modules

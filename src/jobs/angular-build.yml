@@ -1,0 +1,19 @@
+description: >
+  Build an angular project.
+parameters:
+  executor:
+    description: Executor to run on.
+    type: executor
+    default: node14
+executor: <<parameters.executor>>
+steps:
+  - checkout
+  - npm-login-read
+  - with-npm-cache:
+      steps:
+        - run:
+            name: Install dependencies
+            command: npm install
+        - run:
+            name: Build package
+            command: npm run-script build
