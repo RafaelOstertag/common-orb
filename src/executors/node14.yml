@@ -1,5 +1,5 @@
 description: >
   Executor with Node 14
 docker:
-  - image: cimg/openjdk:14.19
+  - image: cimg/node:14.19
 resource_class: medium
