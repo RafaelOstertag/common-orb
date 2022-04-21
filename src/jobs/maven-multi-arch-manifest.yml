@@ -1,0 +1,14 @@
+description: >
+  Create a Docker Multi Arch manifest. The version to use for the tag is read from
+  the pom.xml.
+parameters:
+  remote_docker:
+    type: boolean
+    default: true
+  image:
+    type: string
+executor: java11-build-amd64
+steps:
+  - docker-multi-arch-manifest:
+      image: <<parameters.image>>
+      remote_docker: <<parameters.remote_docker>>

@@ -1,0 +1,16 @@
+description: >
+  Build a Quarkus Native Docker Image. The version to use for the tag is read from
+  the pom.xml.
+parameters:
+  dir:
+    type: string
+  remote_docker:
+    type: boolean
+    default: true
+  executor:
+    type: executor
+executor: <<parameters.executor>>
+steps:
+  - quarkus-native-docker-image:
+      dir: <<parameters.dir>>
+      remote_docker: <<parameters.remote_docker>>
