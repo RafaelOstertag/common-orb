@@ -1,0 +1,18 @@
+description: >
+  Trigger a Circle CI pipeline for the master branch and 
+  pass the release version found in the `pom.xml` along as a parameter named
+  `version`. If the `pom.xml` does contain a snapshot versions, the job will
+  fail. It expects the Circle CI Token provided as environment variable called
+  `CIRCLE_CI_TOKEN`.
+parameters:
+  project-name:
+    description: The project name of the pipeline to trigger.
+    type: string
+executor: java11-build-amd64
+steps:
+  - checkout
+  - run:
+      name: Trigger helm deployment
+      environment:
+        PROJECT_NAME: <<parameters.project-name>>
+      command: <<include(scripts/maven-trigger-pipeline.sh)>>
