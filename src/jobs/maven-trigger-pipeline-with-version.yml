@@ -1,5 +1,5 @@
 description: >
-  Trigger a Circle CI pipeline for the master branch and 
+  Trigger a Circle CI pipeline for the master branch and
   pass the release version found in the `pom.xml` along as a parameter named
   `version`. If the `pom.xml` does contain a snapshot versions, the job will
   fail. It expects the Circle CI Token provided as environment variable called
