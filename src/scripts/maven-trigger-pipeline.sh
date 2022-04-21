@@ -1,10 +1,11 @@
 VERSION=$(mvn -B -q help:evaluate -Dexpression='project.version' -DforceStdout=true)
 
-set -x
-env
-
-echo "${VERSION}" | grep -E -- '-SNAPSHOT$' >/dev/null
-IS_SNAPSHOT=$?
+if echo "${VERSION}" | grep -E -- '-SNAPSHOT$' >/dev/null
+then
+  IS_SNAPSHOT=0
+else
+  IS_SNAPSHOT=1
+fi
 
 if [ "${IS_SNAPSHOT}" -eq 0 ] && [ "${ALLOW_SNAPSHOT}" == "false" ]
 then
