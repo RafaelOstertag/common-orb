@@ -1,0 +1,4 @@
+description: >
+ Executor which has access to internal infrastructure
+machine: true
+resource_class: rafaelostertag/runners-arm64
