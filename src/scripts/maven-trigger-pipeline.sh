@@ -1,5 +1,8 @@
 VERSION=$(mvn -B -q help:evaluate -Dexpression='project.version' -DforceStdout=true)
 
+set -x
+env
+
 echo "${VERSION}" | grep -E -- '-SNAPSHOT$' >/dev/null
 IS_SNAPSHOT=$?
 
