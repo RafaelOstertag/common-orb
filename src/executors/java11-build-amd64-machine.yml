@@ -3,3 +3,6 @@ description: >
 machine:
   image: ubuntu-2004:current
 resource_class: medium
+environment:
+  JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+  PATH: /usr/lib/jvm/java-11-openjdk-amd64/bin:/usr/bin:/bin:/usr/local/bin
