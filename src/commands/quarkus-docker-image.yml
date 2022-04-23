@@ -1,0 +1,39 @@
+description: >
+  Build docker image using quarkus. If no tag is provided, it is read from the POM file.
+  If it's a snapshot version, the tag will be `latest`, else it's equal to the version of the POM.
+parameters:
+  dir:
+    description: Directory in which `mvn` is called.
+    type: string
+  tag:
+    description: Tag of the image. When not set, the tag is the version of the POM.
+    type: string
+    default: ""
+  remote_docker:
+    description: Is a remote docker setup required.
+    type: boolean
+    default: true
+  push:
+    description: Whether to push the image to the registry.
+    type: boolean
+    default: true
+  image-group:
+    description: The image group
+    type: string
+    default: rafaelostertag
+steps:
+  - when:
+      condition: <<parameters.remote_docker>>
+      steps:
+        - setup_remote_docker:
+            version: 20.10.11
+            docker_layer_caching: true
+  - checkout
+  - run:
+      name: Build & push docker native image
+      working_directory: << parameters.dir >>
+      environment:
+        IMAGE_TAG: <<parameters.tag>>
+        IMAGE_GROUP: <<parameters.image-group>>
+        PUSH_IMAGE: <<parameters.push>>
+      command: <<include(scripts/quarkus-native-docker-image.sh)>>
