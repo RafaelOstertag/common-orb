@@ -14,7 +14,13 @@ steps:
   - with-maven-cache:
       steps:
         - run:
+            name: Build & test
+            command: <<include(scripts/maven-clean-and-build.sh)>>
+        - run:
             environment:
               SONAR_PROJECT_KEY: <<parameters.sonar-project-key>>
-            name: Build and test
-            command: <<include(scripts/maven-build-and-test.sh)>>
+            name: Sonar
+            command: <<include(scripts/maven-sonar.sh)>>
+        - run:
+            name: Dependency Check
+            command: <<include(scripts/maven-dependency-check.sh)>>
