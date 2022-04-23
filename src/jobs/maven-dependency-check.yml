@@ -11,5 +11,8 @@ steps:
   - with-maven-cache:
       steps:
         - run:
+            name: Build project
+            command: <<include(scripts/maven-clean-and-build-no-tests.sh)>>
+        - run:
             name: Execute depdendency-check plugin
             command: <<include(scripts/maven-dependency-check.sh)>>
