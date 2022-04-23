@@ -30,10 +30,10 @@ steps:
             docker_layer_caching: true
   - checkout
   - run:
-      name: Build & push docker native image
+      name: Build & push docker image
       working_directory: << parameters.dir >>
       environment:
         IMAGE_TAG: <<parameters.tag>>
         IMAGE_GROUP: <<parameters.image-group>>
         PUSH_IMAGE: <<parameters.push>>
-      command: <<include(scripts/quarkus-native-docker-image.sh)>>
+      command: <<include(scripts/quarkus-docker-image.sh)>>
