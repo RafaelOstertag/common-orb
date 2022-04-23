@@ -1,5 +1,5 @@
 description: >
-  Executor with OpenJDK 11
+  Executor with OpenJDK 11 on AMD64
 docker:
   - image: cimg/openjdk:11.0
 resource_class: medium
