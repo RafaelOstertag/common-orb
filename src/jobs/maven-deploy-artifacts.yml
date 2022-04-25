@@ -5,9 +5,16 @@ parameters:
     description: Executor to run on.
     type: executor
     default: java11-build-amd64
+  no-checkout:
+    description: Disable checkout step. Useful in conjunction with pre-steps that already checkout sources.
+    type: boolean
+    default: false
 executor: <<parameters.executor>>
 steps:
-  - checkout
+  - unless:
+      condition: <<parameters.no-checkout>>
+      steps:
+        - checkout
   - with-maven-cache:
       steps:
         - run:
