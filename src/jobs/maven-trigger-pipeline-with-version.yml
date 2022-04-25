@@ -7,6 +7,10 @@ parameters:
   project-name:
     description: The project name of the pipeline to trigger.
     type: string
+  branch-name:
+    description: The branch to trigger the pipeline on.
+    type: string
+    default: master
   allow-snapshot:
     description: Allow the version to read from the pom to be a snapshot.
     type: boolean
@@ -19,4 +23,5 @@ steps:
       environment:
         PROJECT_NAME: <<parameters.project-name>>
         ALLOW_SNAPSHOT: <<parameters.allow-snapshot>>
+        BRANCH_NAME: <<parameters.branch-name>>
       command: <<include(scripts/maven-trigger-pipeline.sh)>>
