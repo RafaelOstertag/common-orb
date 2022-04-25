@@ -8,6 +8,10 @@ parameters:
     description: Executor to run on.
     type: executor
     default: java11-build-amd64
+  no-sonar:
+    description: Disable sonar step.
+    type: boolean
+    default: false
 executor: <<parameters.executor>>
 steps:
   - checkout
@@ -16,11 +20,14 @@ steps:
         - run:
             name: Build & test
             command: <<include(scripts/maven-clean-and-build.sh)>>
-        - run:
-            environment:
-              SONAR_PROJECT_KEY: <<parameters.sonar-project-key>>
-            name: Sonar
-            command: <<include(scripts/maven-sonar.sh)>>
+        - unless:
+            condition: <<parameters.no-sonar>>
+            steps:
+              - run:
+                  environment:
+                    SONAR_PROJECT_KEY: <<parameters.sonar-project-key>>
+                  name: Sonar
+                  command: <<include(scripts/maven-sonar.sh)>>
         - run:
             name: Dependency Check
             command: <<include(scripts/maven-dependency-check.sh)>>
