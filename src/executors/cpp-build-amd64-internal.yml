@@ -1,4 +1,4 @@
 description: >
- Internal executory for C++.
+ Internal executor for C++.
 machine: true
 resource_class: rafaelostertag/runners-amd64
